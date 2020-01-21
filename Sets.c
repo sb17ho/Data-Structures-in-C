@@ -1,6 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"Binarytree.h"
+#include"Sets.h"
 
 node *createNode(){
     node *node = malloc(sizeof(struct Node));
@@ -14,12 +12,37 @@ int main(){
     add(&root, 10);
     add(&root, 20);
     add(&root, 5);
-    add(&root, 6);
-    add(&root, 2);
-    add(&root, 23);
-    add(&root, 12);
-    root = removeEle(root, 5);
+    add(&root, 5);
+    // add(&root, 2);
+    // add(&root, 23);
+    // add(&root, 12);
+    // root = removeEle(root, 5);
     traversal(root);
+}
+
+void add(node **root, int value){
+    if((*root) == NULL){
+        (*root) = createNode();
+        (*root)->value = value;
+    }else if(exist((*root), value) == 0){
+        if((*root)->value > value){
+            if((*root)->left == NULL){
+                (*root)->left = createNode();
+                (*root)->left->value = value;
+            }else{
+                add(&((*root)->left), value);
+            }
+        }else if((*root)->value < value){
+            if((*root)->right == NULL){
+                (*root)->right = createNode();
+                (*root)->right->value = value;
+            }else{
+                add(&((*root)->right), value);
+            }
+        }
+    }else{
+        printf("The value already exit\n");
+    }
 }
 
 node * removeEle(node *root, int value){
@@ -45,11 +68,6 @@ node * removeEle(node *root, int value){
                 return root;
             }
         }
-        // printf("YO");
-        // if((*root) == NULL){
-        //     printf("Helloworld");
-        //     exit(1);
-        // }
     }
 }
 
@@ -69,25 +87,15 @@ void traversal(node *root){
     if(root->right != NULL) traversal(root->right);
 } 
 
-void add(node **root, int value){
-    if((*root) == NULL){
-        (*root) = createNode();
-        (*root)->value = value;
+int exist(node *root, int value){
+    int check = 0;
+    if(root == NULL) return check;
+    if(root->value == value){
+        check=1;
     }
+    if(value < root->value) exist(root->left, value);
+    if(value > root->value) exist(root->right, value);
+    return check;
+} 
 
-    if((*root)->value > value){
-        if((*root)->left == NULL){
-            (*root)->left = createNode();
-            (*root)->left->value = value;
-        }else{
-            add(&((*root)->left), value);
-        }
-    }else if((*root)->value < value){
-        if((*root)->right == NULL){
-            (*root)->right = createNode();
-            (*root)->right->value = value;
-        }else{
-            add(&((*root)->right), value);
-        }
-    }
-}
+

@@ -19,7 +19,7 @@ int main(){
     add(&root, 23);
     add(&root, 12);
     root = removeEle(root, 5);
-    traversal(root);
+    inOrder(root);
 }
 
 node * removeEle(node *root, int value){
@@ -45,11 +45,6 @@ node * removeEle(node *root, int value){
                 return root;
             }
         }
-        // printf("YO");
-        // if((*root) == NULL){
-        //     printf("Helloworld");
-        //     exit(1);
-        // }
     }
 }
 
@@ -60,14 +55,34 @@ node * leftMost(node *root){
     return root;
 }
 
-void traversal(node *root){
+void preOrder(node *root){
 
     if(root == NULL)return;
 
     printf("%d\n", root->value);
-    if(root->left != NULL) traversal(root->left);
-    if(root->right != NULL) traversal(root->right);
+    if(root->left != NULL) preOrder(root->left);
+    if(root->right != NULL) preOrder(root->right);
 } 
+
+void postOrder(node *root){
+
+    if(root == NULL)return;
+
+    if(root->left != NULL) postOrder(root->left);
+    if(root->right != NULL) postOrder(root->right);
+    printf("%d\n", root->value);
+} 
+
+
+void inOrder(node *root){
+
+    if(root == NULL)return;
+
+    if(root->left != NULL) inOrder(root->left);
+    printf("%d\n", root->value);
+    if(root->right != NULL) inOrder(root->right);
+} 
+
 
 void add(node **root, int value){
     if((*root) == NULL){

@@ -13,6 +13,6 @@ node * removeEle(node *root, int value);
 node * leftMost(node *root);
 node *createNode();
 void add(node **root, int value);
-void traversal(node *root);
+void print(node *root);
 int exist(node *root, int value);
 

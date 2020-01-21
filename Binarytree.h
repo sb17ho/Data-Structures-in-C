@@ -10,4 +10,6 @@ node * removeEle(node *root, int value);
 node * leftMost(node *root);
 node *createNode();
 void add(node **root, int value);
-void traversal(node *root);
+void preOrder(node *root);
+void postOrder(node *root);
+void inOrder(node *root);

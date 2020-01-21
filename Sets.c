@@ -13,11 +13,10 @@ int main(){
     add(&root, 20);
     add(&root, 5);
     add(&root, 5);
-    // add(&root, 2);
-    // add(&root, 23);
-    // add(&root, 12);
-    // root = removeEle(root, 5);
-    traversal(root);
+
+    root = removeEle(root, 5);
+    add(&root, 5);
+    print(root);
 }
 
 void add(node **root, int value){
@@ -78,13 +77,13 @@ node * leftMost(node *root){
     return root;
 }
 
-void traversal(node *root){
+void print(node *root){
 
     if(root == NULL)return;
 
+    if(root->left != NULL) print(root->left);
     printf("%d\n", root->value);
-    if(root->left != NULL) traversal(root->left);
-    if(root->right != NULL) traversal(root->right);
+    if(root->right != NULL) print(root->right);
 } 
 
 int exist(node *root, int value){

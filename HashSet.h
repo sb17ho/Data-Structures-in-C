@@ -10,3 +10,4 @@ int hashkey(int value);
 int isFull();
 void print();
 void initialize();
+int removeEle(int value);

@@ -1,4 +1,4 @@
-#include"HashTable.h"
+#include"HashSet.h"
 
 int main(){
     arr = calloc(size, sizeof(int));
@@ -7,6 +7,9 @@ int main(){
     put(5);
     put(3);
     put(1);
+    print();
+    printf("Removed: %d\n", removeEle(5));
+    printf("After removal\n");
     print();
 }
 
@@ -55,9 +58,27 @@ int isFull(){
     }
 }
 
+int removeEle(int value){
+    int result = 0;
+    if(arr[hashkey(value)] == value){
+        int index = hashkey(value);
+        result = arr[index];
+        arr[index] = __INT_MAX__;
+    }else{
+        int i = 0;
+        while(arr[i] != value){
+            i++;
+        }
+        result = arr[i];
+        arr[i] = __INT_MAX__;
+    }
+    return result;
+}
+
 void print(){
     for (size_t i = 0; i < size; i++){
-        printf("%d\n", arr[i]);
+        if(arr[i]==__INT_MAX__)printf(".\n");
+        else printf("%d\n", arr[i]);
     }
     
 }
